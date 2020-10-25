@@ -11,11 +11,11 @@
 | first_name      | string | null: false | 
 | last_name_kana  | string | null: false | 
 | first_name_kana | string | null: false | 
-| birtyday        | int    | null: false | 
+| birtyday        | date   | null: false | 
 
 ### Association
 - has_many :items
-- has_may :purchases
+- has_many :purchases
 
 ## items テーブル
 | Column          | Type    | Options     | 
@@ -23,11 +23,11 @@
 | user_id         | integer | null: false, foreign_key: true | 
 | title           | string  | null: false | 
 | description     | text    | null: false | 
-| category        | string  | null: false | 
-| condition       | string  | null: false | 
-| delivery_fee    | integer | null: false | 
-| delivery_locate | string  | null: false | 
-| delivery_days   | date    | null: false | 
+| category_id     | integer | null: false | 
+| condition_id    | integer | null: false | 
+| fee_id          | integer | null: false | 
+| locate_id       | integer | null: false | 
+| day_id          | integer | null: false | 
 | price           | integer | null: false | 
 
 ### Association
@@ -35,17 +35,25 @@
 - has_one :purchase
 
 ## purchases テーブル
-| Column     | Type    | Options                        | 
-| ---------- | ------- | ------------------------------ | 
-| item_id    | integer | null: false, foreign_key: true | 
-| user_id    | integer | null: false, foreign_key: true | 
-| zip        | integer | null: false                    | 
-| prefecture | string  | null: false                    | 
-| city       | string  | null: false                    | 
-| number     | string  | null: false                    | 
-| building   | string  |                                | 
-| tel        | integer | null: false                    | 
+| Column     | Type       | Options                        | 
+| ---------- | ---------- | ------------------------------ | 
+| item_id    | integer    | null: false, foreign_key: true | 
+| user_id    | references | null: false, foreign_key: true | 
 
 ### Association
 - belongs_to :item
 - belongs_to :user
+
+## adresses  テーブル
+| Column      | Type    | Options                        | 
+| ----------- | ------- | ------------------------------ | 
+| purchase_id | integer | null: false                    | 
+| zip         | string  | null: false                    | 
+| prefecture  | integer | null: false                    | 
+| city        | string  | null: false                    | 
+| number      | string  | null: false                    | 
+| building    | string  |                                | 
+| tel         | string  | null: false                    | 
+
+### Association
+- belongs_to :purchase
