@@ -43,8 +43,9 @@
 ### Association
 - belongs_to :item
 - belongs_to :user
+- has_one :address
 
-## adresses  テーブル
+## addresses  テーブル
 | Column      | Type    | Options                        | 
 | ----------- | ------- | ------------------------------ | 
 | purchase_id | integer | null: false                    | 
