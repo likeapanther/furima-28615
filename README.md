@@ -38,7 +38,7 @@
 | Column     | Type       | Options                        | 
 | ---------- | ---------- | ------------------------------ | 
 | item_id    | integer    | null: false, foreign_key: true | 
-| user_id    | references | null: false, foreign_key: true | 
+| user_id    | integer    | null: false, foreign_key: true | 
 
 ### Association
 - belongs_to :item
@@ -48,7 +48,7 @@
 ## addresses  テーブル
 | Column      | Type    | Options                        | 
 | ----------- | ------- | ------------------------------ | 
-| purchase_id | integer | null: false                    | 
+| purchase_id | integer | null: false, foreign_key: true |
 | zip         | string  | null: false                    | 
 | prefecture  | integer | null: false                    | 
 | city        | string  | null: false                    | 
