@@ -26,7 +26,7 @@
 | category_id     | integer | null: false | 
 | condition_id    | integer | null: false | 
 | fee_id          | integer | null: false | 
-| locate_id       | integer | null: false | 
+| prefecture_id   | integer | null: false | 
 | day_id          | integer | null: false | 
 | price           | integer | null: false | 
 
@@ -46,15 +46,15 @@
 - has_one :address
 
 ## addresses  テーブル
-| Column      | Type    | Options                        | 
-| ----------- | ------- | ------------------------------ | 
-| purchase_id | integer | null: false, foreign_key: true |
-| zip         | string  | null: false                    | 
-| prefecture  | integer | null: false                    | 
-| city        | string  | null: false                    | 
-| number      | string  | null: false                    | 
-| building    | string  |                                | 
-| tel         | string  | null: false                    | 
+| Column         | Type    | Options                        | 
+| -------------- | ------- | ------------------------------ | 
+| purchase_id    | integer | null: false, foreign_key: true |
+| zip            | string  | null: false                    | 
+| prefecture_id  | integer | null: false                    | 
+| city           | string  | null: false                    | 
+| number         | string  | null: false                    | 
+| building       | string  |                                | 
+| tel            | string  | null: false                    | 
 
 ### Association
 - belongs_to :purchase
