@@ -1,24 +1,60 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users　テーブル
 
-Things you may want to cover:
+| Column          | Type   | Options     | 
+| --------------- | ------ | ----------- | 
+| nickname        | string | null: false | 
+| email           | string | null: false, unique: true | 
+| password        | string | null: false | 
+| last_name       | string | null: false | 
+| first_name      | string | null: false | 
+| last_name_kana  | string | null: false | 
+| first_name_kana | string | null: false | 
+| birtyday        | date   | null: false | 
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :purchases
 
-* System dependencies
+## items テーブル
+| Column          | Type    | Options     | 
+| --------------- | ------- | ----------- | 
+| user_id         | integer | null: false, foreign_key: true | 
+| title           | string  | null: false | 
+| description     | text    | null: false | 
+| category_id     | integer | null: false | 
+| condition_id    | integer | null: false | 
+| fee_id          | integer | null: false | 
+| prefecture_id   | integer | null: false | 
+| day_id          | integer | null: false | 
+| price           | integer | null: false | 
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :purchase
 
-* Database creation
+## purchases テーブル
+| Column     | Type       | Options                        | 
+| ---------- | ---------- | ------------------------------ | 
+| item_id    | integer    | null: false, foreign_key: true | 
+| user_id    | integer    | null: false, foreign_key: true | 
 
-* Database initialization
+### Association
+- belongs_to :item
+- belongs_to :user
+- has_one :address
 
-* How to run the test suite
+## addresses  テーブル
+| Column         | Type    | Options                        | 
+| -------------- | ------- | ------------------------------ | 
+| purchase_id    | integer | null: false, foreign_key: true |
+| zip            | string  | null: false                    | 
+| prefecture_id  | integer | null: false                    | 
+| city           | string  | null: false                    | 
+| number         | string  | null: false                    | 
+| building       | string  |                                | 
+| tel            | string  | null: false                    | 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :purchase
