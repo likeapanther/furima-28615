@@ -61,24 +61,44 @@ RSpec.describe User, type: :model do
       end
 
     end
-    context 'エラーハンドリング' do
-      it "新規登録時エラーメッセージの出力" do
-        @user.nickname = ""
-        @user.valid?
-
-      end
-
-      it "ログイン時エラーメッセージの出力" do
-        
-      end
-    end
+    
     context '本人情報確認' do
-      it "ユーザー本名が、名字と名前がそれぞれ必須であること" do 
+
+      it "名字が必須であること" do
+        @user.last_name =""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
-      it "ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させること" do end
-      it "ユーザー本名のフリガナが、名字と名前でそれぞれ必須であること" do end
-      it "ユーザー本名のフリガナは全角（カタカナ）で入力させること" do end
-      it "生年月日が必須であること" do end
+      it "名前が必須であること"do
+        @user.first_name =""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
+      it "ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力させること" do
+        @user.last_name ="tanaka"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+      it "名字のフリガナが必須であること" do
+        @user.last_name_kana =""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
+      it "名前のフリガナが必須であること" do 
+        @user.first_name_kana =""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+      end
+      it "ユーザー本名のフリガナは全角（カタカナ）で入力させること" do
+        @user.first_name_kana ="tarou"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana is invalid") 
+      end
+      it "生年月日が必須であること" do
+        @user.birthday = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
+      end
     end
   end
 end
