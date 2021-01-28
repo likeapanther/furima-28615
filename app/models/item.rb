@@ -19,8 +19,5 @@ class Item < ApplicationRecord
     validates :day_id
   end
 
-  def was_attached?
-    self.image.attached?
-  end
 
 end
