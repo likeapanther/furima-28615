@@ -4,7 +4,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    @item = Item.create(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      logger.debug(@item.errors.full_messages)
+      render new_item_path
+    end
+    
   end
 
   def new
@@ -14,8 +21,8 @@ class ItemsController < ApplicationController
 
   private
   
-  def message_params
-    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
+  def item_params
+    params.require(:item).permit(:user_id, :title, :description, :category_id, :condition_id, :fee_id, :prefecture_id, :day_id, :price)
 
   end
 end
