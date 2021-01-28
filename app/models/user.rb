@@ -3,6 +3,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :password, format: { with: VALID_PASSWORD_REGEX }
+  has_many :items
 
   with_options presence: true do
     validates :nickname

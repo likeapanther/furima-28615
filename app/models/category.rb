@@ -1,3 +1,3 @@
-class Category < ActiveHash: :Base
-  
+class Category < ActiveHash::Base
+
 end

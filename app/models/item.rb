@@ -7,8 +7,10 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :title
     validates :description
-    validates :price, inclusion: {in: 300..9999999},format: { with: [0-9] }
+    validates :image
+    validates :price, inclusion: {in: 300..9999999}, format: {with: /\A[0-9]+\z/}
   end
+  
   with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :condition_id
@@ -17,5 +19,8 @@ class Item < ApplicationRecord
     validates :day_id
   end
 
+  def was_attached?
+    self.image.attached?
+  end
 
 end
