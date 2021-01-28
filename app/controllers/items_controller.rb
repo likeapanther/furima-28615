@@ -11,18 +11,15 @@ class ItemsController < ApplicationController
       logger.debug(@item.errors.full_messages)
       render new_item_path
     end
-    
   end
 
   def new
     @item = Item.new
   end
-  
 
   private
-  
-  def item_params
-    params.require(:item).permit( :title, :image,:description, :category_id, :condition_id, :fee_id, :prefecture_id, :day_id, :price).merge(user_id: current_user.id)
 
+  def item_params
+    params.require(:item).permit(:title, :image, :description, :category_id, :condition_id, :fee_id, :prefecture_id, :day_id, :price).merge(user_id: current_user.id)
   end
 end
