@@ -18,5 +18,4 @@ class Item < ApplicationRecord
     validates :fee_id
     validates :day_id
   end
-  
 end
