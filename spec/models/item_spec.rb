@@ -45,7 +45,7 @@ RSpec.describe Item, type: :model do
       it "発送元の地域についての情報が必須であること" do
         @item.prefecture_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture is not a number")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it "発送までの日数についての情報が必須であること" do
         @item.day_id = nil
