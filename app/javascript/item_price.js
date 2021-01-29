@@ -5,7 +5,7 @@ window.addEventListener("turbolinks:load", () => {
     const inputValue = priceInput.value;
     const taxDom  = document.getElementById("add-tax-price");
     const addTaxDom  = document.getElementById("profit");
-    let tax = Math.floor(inputValue/10)
+    let tax = Math.floor(inputValue/10);
 
     taxDom.innerHTML = tax;
     addTaxDom.innerHTML = Number(inputValue) - tax;
