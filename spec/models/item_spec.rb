@@ -45,7 +45,7 @@ RSpec.describe Item, type: :model do
       it '発送元の地域についての情報が必須であること' do
         @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
       end
       it '発送までの日数についての情報が必須であること' do
         @item.day_id = 0
@@ -63,7 +63,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
       it '価格の範囲が、¥10,000,000の以上であること' do
-        @item.price = 100000000
+        @item.price = 100_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
