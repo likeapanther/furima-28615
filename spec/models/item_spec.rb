@@ -30,17 +30,17 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーの情報が必須であること' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category is not a number')
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '商品の状態についての情報が必須であること' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition is not a number')
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料の負担についての情報が必須であること' do
         @item.fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Fee is not a number')
+        expect(@item.errors.full_messages).to include('Fee must be other than 1')
       end
       it '発送元の地域についての情報が必須であること' do
         @item.prefecture_id = nil
@@ -50,15 +50,20 @@ RSpec.describe Item, type: :model do
       it '発送までの日数についての情報が必須であること' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Day is not a number')
+        expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
       it '価格についての情報が必須であること' do
         @item.price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it '価格の範囲が、¥300~¥9,999,999の間であること' do
+      it '価格の範囲が、¥300未満であること' do
         @item.price = 200
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
+      end
+      it '価格の範囲が、¥10,000,000の以上であること' do
+        @item.price = 100000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
