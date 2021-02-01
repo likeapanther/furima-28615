@@ -1,27 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Purchase, type: :model do
+  before do
+    @purchase = FactoryBot.build(:purchase)
+    @item.image = fixture_file_upload('/files/test_image.jpg')
+  end  
+
   describe "商品の購入" do
-    context "商品が購入できるとき" do
-      
+    it "商品が購入できるとき" do
+      expect(@purchase).to be_valid
     end
-    context "商品が購入できないとき" do
-      it '配送先の住所情報も購入の都度入力させること' do end
-      it '配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること' do end
-      it '郵便番号にはハイフンが必要であること（123-4567となる）' do end
-      it '電話番号にはハイフンは不要で、11桁以内であること' do end
-      it '購入が完了したら、トップページまたは購入完了ページに遷移すること' do end
-    end
-    
-    
-    it 'ログインしていないユーザーは購入ページに遷移しようとすると、ログインページに遷移すること' do end
-    it '出品者はURLを直接入力して購入ページに遷移しようとすると、トップページに遷移すること' do end
-    it 'URLを直接入力して購入済み商品の購入ページへ遷移しようとすると、トップページに遷移すること' do end
-    it 'クレジットカード決済ができること' do end
-    it 'クレジットカードの情報は購入の都度入力させること' do end
-    it 'クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できないこと' do end
-    it '配送先の住所情報も購入の都度入力させること' do end
-    it '購入した商品は、再度購入できない状態になっていること' do end
 
     
   end

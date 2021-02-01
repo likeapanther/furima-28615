@@ -6,9 +6,11 @@ class PurchaseController < ApplicationController
   end
 
   def create
-    
+    @item = Item.find(params[:item_id])
     @form = Form.new(form_params)
+    
     if @form.valid?
+      pay_item
       @form.save
       return redirect_to root_path
     else
@@ -27,6 +29,15 @@ class PurchaseController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:price).merge(token: params[:token])
+    params.require(:form).permit(:price).merge(token: params[:token])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,  # 商品の値段
+      card: purchase_params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+      )
   end
 end
