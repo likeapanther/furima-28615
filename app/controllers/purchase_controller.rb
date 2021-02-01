@@ -3,29 +3,36 @@ class PurchaseController < ApplicationController
   #before_action :item_params, only: [:index,:create]
 
   def index
-    #閲覧しているユーザーと出品者が違う場合
-    if current_user.id != Item.find_by_id(params[:item_id]).user_id
-      @form = Form.new
-      @user = current_user
-      @item = Item.find(params[:item_id])
-      
-    else
-      redirect_to root_path
-    end
+    #購入情報に商品がない場合
+    if Purchase.find_by(item_id: params[:item_id]).nil?
+      #閲覧しているユーザーと出品者が違う場合
+      if current_user.id != Item.find_by_id(params[:item_id]).user_id
+        @form = Form.new
+        @user = current_user
+        @item = Item.find(params[:item_id])
+        
+      else
+        redirect_to root_path
+      end
+  else
+    redirect_to root_path
+  end
   end
 
   def create
-    @item = Item.find(params[:item_id])
-    @form = Form.new(form_params)
-    
-    binding.pry
-    
-    if @form.valid?
-      pay_item
-      @form.save
-      return redirect_to root_path
+    #すでに購入されているとき
+    if Purchase.find_by(item_id: params[:item_id]).nil?
+      @item = Item.find(params[:item_id])
+      @form = Form.new(form_params)
+      if @form.valid?
+        pay_item
+        @form.save
+        return redirect_to root_path
+      else
+        render :index
+      end
     else
-      render :index
+      redirect_to root_path
     end
   end
 
