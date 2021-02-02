@@ -7,7 +7,6 @@ class PurchaseController < ApplicationController
     # 閲覧しているユーザーと出品者が違う場合
     if current_user.id != @item.user_id
       @form = Form.new
-      @user = current_user
 
     else
       redirect_to root_path
