@@ -1,6 +1,6 @@
 class Form
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :price, :token, :purchase_id, :zip, :prefecture_id, :city, :number, :building, :tel
+  attr_accessor :user_id, :item_id, :price, :token, :zip, :prefecture_id, :city, :number, :building, :tel
 
   validates :token, presence: true
 

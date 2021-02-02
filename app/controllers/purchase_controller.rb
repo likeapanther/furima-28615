@@ -30,6 +30,9 @@ class PurchaseController < ApplicationController
 
   def check_item
     #すでに購入されているとき
+    
+    binding.pry
+    
     if Purchase.find_by(item_id: params[:item_id]).nil?
     else
       redirect_to root_path
