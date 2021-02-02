@@ -6,9 +6,17 @@ RSpec.describe Form, type: :model do
     @purchase = FactoryBot.build(:purchase)
   end
 
-  describe '住所の入力' do
-    it '住所が登録できるとき' do
+  describe '購入処理' do
+    context '購入できるとき' do
+      it "すべての欄が埋まっているとき" do
       expect(@address).to be_valid
+      end
+      
+
+      it '建物名からでも登録が可能なこと'do
+      @address.building = nil
+      expect(@address).to be_valid
+      end
     end
     context '住所が登録できないとき' do
       it '配送先の情報として、郵便番号が必須であること' do
