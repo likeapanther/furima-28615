@@ -5,20 +5,19 @@ RSpec.describe Form, type: :model do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('/files/test_image.jpg')
-    @token = "aaa"
-    @form = FactoryBot.build(:form,user_id: @user,item_id: @item,token: @token)
+    @token = 'aaa'
+    @form = FactoryBot.build(:form, user_id: @user, item_id: @item, token: @token)
   end
 
   describe '購入処理' do
     context '購入できるとき' do
-      it "すべての欄が埋まっているとき" do
-      expect(@form).to be_valid
+      it 'すべての欄が埋まっているとき' do
+        expect(@form).to be_valid
       end
-      
 
-      it '建物名からでも登録が可能なこと'do
-      @form.building = nil
-      expect(@form).to be_valid
+      it '建物名からでも登録が可能なこと' do
+        @form.building = nil
+        expect(@form).to be_valid
       end
     end
     context '住所が登録できないとき' do

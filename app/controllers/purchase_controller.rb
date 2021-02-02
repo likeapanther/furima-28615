@@ -1,38 +1,35 @@
 class PurchaseController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index,:create,:check_item]
-  before_action :check_item, only: [:index,:create]
+  before_action :set_item, only: [:index, :create, :check_item]
+  before_action :check_item, only: [:index, :create]
 
   def index
-      # 閲覧しているユーザーと出品者が違う場合
-      if current_user.id != @item.user_id
-        @form = Form.new
-        @user = current_user
+    # 閲覧しているユーザーと出品者が違う場合
+    if current_user.id != @item.user_id
+      @form = Form.new
+      @user = current_user
 
-      else
-        redirect_to root_path
-      end
-
+    else
+      redirect_to root_path
+    end
   end
 
   def create
-      @form = Form.new(form_params)
-      if @form.valid?
-        pay_item
-        @form.save
-        redirect_to root_path
-      else
-        render :index
-      end
+    @form = Form.new(form_params)
+    if @form.valid?
+      pay_item
+      @form.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
 
   def check_item
-    #すでに購入されているとき
-    if @item.purchase.present?
-      redirect_to root_path
-    end
+    # すでに購入されているとき
+    redirect_to root_path if @item.purchase.present?
   end
 
   def form_params

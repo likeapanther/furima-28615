@@ -1,7 +1,7 @@
 class Form
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :price, :token, :zip, :prefecture_id, :city, :number, :building, :tel
-  
+
   with_options presence: true do
     validates :zip, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :prefecture_id, numericality: { only_integer: true }
