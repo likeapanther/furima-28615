@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Form, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item)
+    @item = FactoryBot.build(:item)
+    @item.image = fixture_file_upload('/files/test_image.jpg')
     @token = "aaa"
     @form = FactoryBot.build(:form,user_id: @user,item_id: @item,token: @token)
   end
@@ -11,7 +12,6 @@ RSpec.describe Form, type: :model do
   describe '購入処理' do
     context '購入できるとき' do
       it "すべての欄が埋まっているとき" do
-      
       expect(@form).to be_valid
       end
       

@@ -7,7 +7,5 @@ FactoryBot.define do
     building      { 'マンション' }
     tel           { 11_122_223_333 }
     
-    #association :item
-    #association :user
   end
 end
