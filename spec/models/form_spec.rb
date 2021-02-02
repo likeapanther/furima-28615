@@ -59,6 +59,16 @@ RSpec.describe Form, type: :model do
         @address.valid?
         expect(@address.errors.full_messages).to include('Tel is invalid')
       end
+      it 'user_idが空の場合' do
+        @purchase.user_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("User must exist", "User can't be blank")
+      end
+      it 'item_idが空の場合' do
+        @purchase.item_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Item must exist", "Item can't be blank")
+      end
     end
   end
 end
