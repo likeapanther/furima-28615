@@ -5,7 +5,7 @@ class PurchaseController < ApplicationController
 
   def index
       # 閲覧しているユーザーと出品者が違う場合
-      if current_user.id != Item.find_by_id(params[:item_id]).user_id
+      if current_user.id != @item.user_id
         @form = Form.new
         @user = current_user
 
@@ -30,8 +30,7 @@ class PurchaseController < ApplicationController
 
   def check_item
     #すでに購入されているとき
-    if @item.purchase.nil?      
-    else
+    if @item.purchase.present?
       redirect_to root_path
     end
   end
