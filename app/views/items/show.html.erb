@@ -31,7 +31,7 @@
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
       <% elsif %>
         <%# 商品が売れていない場合%>
-        <%if Purchase.find_by(item_id: params[:id]).nil? %>
+        <%if @item.purchase.nil? %>
         <%= link_to '購入画面に進む', item_purchase_index_path(@item.id) ,class:"item-red-btn"%>
         <%end%>
       <%end%>

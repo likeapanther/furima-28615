@@ -1,6 +1,6 @@
 class PurchaseController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index,:create]
+  before_action :set_item, only: [:index,:create,:check_item]
   before_action :check_item, only: [:index,:create]
 
   def index
@@ -30,14 +30,10 @@ class PurchaseController < ApplicationController
 
   def check_item
     #すでに購入されているとき
-    
-    binding.pry
-    
-    if Purchase.find_by(item_id: params[:item_id]).nil?
+    if @item.purchase.nil?      
     else
       redirect_to root_path
     end
-
   end
 
   def form_params
