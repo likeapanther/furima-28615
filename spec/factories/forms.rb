@@ -6,5 +6,6 @@ FactoryBot.define do
     number        { 5 }
     building      { 'マンション' }
     tel           { 11122223333 }
+    token         { 'aaa' }
   end
 end

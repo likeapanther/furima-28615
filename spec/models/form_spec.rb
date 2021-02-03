@@ -5,14 +5,12 @@ RSpec.describe Form, type: :model do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('/files/test_image.jpg')
-    @token = 'aaa'
-    @form = FactoryBot.build(:form, user_id: @user, item_id: @item, token: @token)
+    @form = FactoryBot.build(:form, user_id: @user, item_id: @item)
   end
 
   describe '購入処理' do
     context '購入できるとき' do
       it 'すべての欄が埋まっているとき' do
-
         expect(@form).to be_valid
       end
 
@@ -30,12 +28,12 @@ RSpec.describe Form, type: :model do
       it '配送先の情報として、都道府県が必須であること' do
         @form.prefecture_id = nil
         @form.valid?
-        expect(@form.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not included in the list")
+        expect(@form.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not included in the list')
       end
       it '0が選択された場合は購入できないこと' do
         @form.prefecture_id = 0
         @form.valid?
-        expect(@form.errors.full_messages).to include("Prefecture is not included in the list")
+        expect(@form.errors.full_messages).to include('Prefecture is not included in the list')
       end
       it '配送先の情報として、市区町村が必須であること' do
         @form.city = nil
