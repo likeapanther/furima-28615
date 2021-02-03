@@ -59,6 +59,7 @@
 ### Association
 - belongs_to :purchase
 
+
 ## テスト項目
 ### ユーザーモデル
 パスワードが必須であること
