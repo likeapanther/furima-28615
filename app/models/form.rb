@@ -4,7 +4,7 @@ class Form
 
   with_options presence: true do
     validates :zip, format: { with: /\A\d{3}-\d{4}\z/ }
-    validates :prefecture_id, inclusion: { in: 1..47 }
+    validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :number
     validates :tel, format: { with: /\A\d{11}\z/ }
